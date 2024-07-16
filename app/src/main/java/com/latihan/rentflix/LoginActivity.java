@@ -34,10 +34,17 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Cursor cursor = databaseHelper.getUser(username, password);
                 if (cursor != null && cursor.moveToFirst()) {
                     String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
                     String gender = cursor.getString(cursor.getColumnIndexOrThrow("gender"));
+
+                    Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     intent.putExtra("name", name);

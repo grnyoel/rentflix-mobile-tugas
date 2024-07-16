@@ -1,8 +1,6 @@
 package com.latihan.rentflix;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +41,12 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = passwordEditText.getText().toString();
                 String confirmPassword = confirmPasswordEditText.getText().toString();
                 int selectedGenderId = genderRadioGroup.getCheckedRadioButtonId();
+
+                if (name.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || selectedGenderId == -1) {
+                    Toast.makeText(RegisterActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 RadioButton selectedRadioButton = findViewById(selectedGenderId);
                 String gender = selectedRadioButton.getText().toString();
 
